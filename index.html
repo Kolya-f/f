@@ -144,12 +144,14 @@
         /* Основной контент */
         main {
             margin-top: 80px;
+            padding-bottom: 50px;
         }
         
         /* Секции */
         .section {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
             position: relative;
+            overflow: hidden;
         }
         
         .section-title {
@@ -158,6 +160,7 @@
             margin-bottom: 3rem;
             position: relative;
             color: var(--primary);
+            z-index: 1;
         }
         
         .section-title::after {
@@ -181,6 +184,8 @@
             margin: 0 auto;
             flex-wrap: wrap;
             justify-content: center;
+            position: relative;
+            z-index: 1;
         }
         
         .about-photo {
@@ -241,7 +246,7 @@
             gap: 0.5rem;
             transition: all 0.3s;
             font-weight: 500;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow:  ️0 4px 10px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -280,6 +285,8 @@
         .apps-container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .apps-grid {
@@ -363,6 +370,8 @@
         .skills-container {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .skill-item {
@@ -411,15 +420,6 @@
             to { transform: translateY(0); opacity: 1; }
         }
         
-        /* Футер */
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
         /* Темная тема */
         .dark-theme {
             --light: #2d3436;
@@ -446,6 +446,43 @@
             transform: rotate(30deg) scale(1.1);
         }
         
+        /* Динамічні елементи */
+        .dynamic-element {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .circle {
+            border-radius: 50%;
+            background: rgba(253, 121, 168, 0.2);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            animation: rotate 15s linear infinite;
+        }
+        
+        .line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
         /* Адаптивность */
         @media (max-width: 768px) {
             .nav-links {
@@ -464,6 +501,10 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .section {
+                padding: 4rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -475,6 +516,9 @@
 
     <!-- Анімований фон -->
     <div class="animated-bg"></div>
+    
+    <!-- Динамічні елементи -->
+    <div id="dynamicElements"></div>
 
     <header>
         <nav>
@@ -492,9 +536,14 @@
     
     <main>
         <!-- Hero секція -->
-        <section class="section" style="background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(108, 92, 231, 0.8)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 10rem 2rem;">
+        <section class="section" style="background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(108, 92, 231, 0.8)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 12rem 2rem;">
             <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Ласкаво прошу на мій сайт</h1>
             <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto;">Розробка програмного забезпечення та креативні рішення</p>
+            <div style="margin-top: 3rem;">
+                <a href="#about" style="color: white; font-size: 2rem; animation: float 3s ease-in-out infinite;">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
         </section>
         
         <!-- Про мене -->
@@ -585,10 +634,6 @@
             </div>
         </section>
     </main>
-    
-    <footer>
-        <p>&copy; 2023 FipokZec. Всі права захищені.</p>
-    </footer>
 
     <script>
         // Лоадер
@@ -600,6 +645,53 @@
                 }, 500);
             }, 1000);
         });
+
+        // Створення динамічних елементів
+        function createDynamicElements() {
+            const container = document.getElementById('dynamicElements');
+            const colors = ['#6c5ce7', '#a29bfe', '#fd79a8', '#00cec9'];
+            
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.classList.add('dynamic-element');
+                
+                const type = Math.random() > 0.5 ? 'circle' : 
+                             Math.random() > 0.5 ? 'triangle' : 'line';
+                element.classList.add(type);
+                
+                // Рандомні параметри
+                const size = Math.random() * 100 + 20;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const opacity = Math.random() * 0.4 + 0.1;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 10;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                element.style.width = `${size}px`;
+                element.style.height = type === 'circle' ? `${size}px` : 
+                                      type === 'triangle' ? '0' : '2px';
+                element.style.left = `${left}vw`;
+                element.style.top = `${top}vh`;
+                element.style.opacity = opacity;
+                element.style.animationDelay = `${delay}s`;
+                element.style.animationDuration = `${duration}s`;
+                
+                if (type === 'triangle') {
+                    const direction = Math.random() > 0.5 ? 'left' : 'right';
+                    const borderWidth = size / 2;
+                    element.style.borderWidth = `0 ${direction === 'left' ? borderWidth : 0}px ${size}px ${direction === 'right' ? borderWidth : 0}px`;
+                    element.style.borderColor = `transparent transparent ${color} transparent`;
+                } else if (type === 'line') {
+                    element.style.width = `${size * 3}px`;
+                    element.style.background = `linear-gradient(90deg, transparent, ${color}, transparent)`;
+                } else {
+                    element.style.background = color;
+                }
+                
+                container.appendChild(element);
+            }
+        }
 
         // Анімація навичок при скролі
         function animateSkills() {
@@ -655,8 +747,12 @@
             }
         });
 
-        // Анімація заголовків
-        document.addEventListener('DOMContentLoaded', function() {
+        // Запускаємо анімації
+        window.addEventListener('load', function() {
+            createDynamicElements();
+            animateSkills();
+            
+            // Анімація заголовків
             const titles = document.querySelectorAll('h1, h2, h3');
             
             titles.forEach(title => {
@@ -674,9 +770,7 @@
             });
         });
 
-        // Запускаємо анімації
         window.addEventListener('scroll', animateSkills);
-        window.addEventListener('load', animateSkills);
     </script>
 </body>
 </html>
