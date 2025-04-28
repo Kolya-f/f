@@ -12,6 +12,11 @@
             --dark: #2d3436;
             --light: #f5f6fa;
             --accent: #fd79a8;
+            --night-primary: #9c88ff;
+            --night-secondary: #8c7ae6;
+            --night-dark: #121212;
+            --night-light: #1e272e;
+            --night-accent: #e84393;
         }
         
         * {
@@ -26,6 +31,35 @@
             line-height: 1.6;
             position: relative;
             overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.3s ease;
+        }
+
+        /* Нічний режим */
+        body.dark-theme {
+            background-color: var(--night-dark);
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme .section-title {
+            color: var(--night-primary);
+        }
+        
+        body.dark-theme .about-text h2,
+        body.dark-theme .skill-item span {
+            color: #f5f6fa;
+        }
+        
+        body.dark-theme .app-card {
+            background: rgba(30, 39, 46, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        body.dark-theme .skill-bar {
+            background: rgba(156, 136, 255, 0.2);
+        }
+        
+        body.dark-theme .skill-progress {
+            background: linear-gradient(90deg, var(--night-primary), var(--night-accent));
         }
 
         /* Анімований фон */
@@ -39,6 +73,11 @@
             background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #fd79a8, #6c5ce7);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
+            transition: opacity 0.5s;
+        }
+        
+        body.dark-theme .animated-bg {
+            opacity: 0.15;
         }
         
         @keyframes gradientBG {
@@ -87,6 +126,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
             background: rgba(108, 92, 231, 0.8);
+            transition: all 0.3s;
+        }
+        
+        body.dark-theme header {
+            background: rgba(30, 39, 46, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
         nav {
@@ -126,6 +171,10 @@
             color: var(--accent);
         }
         
+        body.dark-theme .nav-links a:hover {
+            color: var(--night-accent);
+        }
+        
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -135,6 +184,10 @@
             left: 0;
             background-color: var(--accent);
             transition: width 0.3s;
+        }
+        
+        body.dark-theme .nav-links a::after {
+            background-color: var(--night-accent);
         }
         
         .nav-links a:hover::after {
@@ -163,6 +216,10 @@
             z-index: 1;
         }
         
+        body.dark-theme .section-title {
+            color: var(--night-primary);
+        }
+        
         .section-title::after {
             content: '';
             position: absolute;
@@ -173,6 +230,10 @@
             left: 50%;
             transform: translateX(-50%);
             border-radius: 2px;
+        }
+        
+        body.dark-theme .section-title::after {
+            background: var(--night-accent);
         }
         
         /* Обо мне */
@@ -201,6 +262,11 @@
             transform: rotate(-5deg);
             z-index: -1;
             border-radius: 15px;
+            transition: all 0.3s;
+        }
+        
+        body.dark-theme .photo-frame {
+            border-color: var(--night-primary);
         }
         
         .floating-img {
@@ -211,6 +277,10 @@
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
             border: 5px solid white;
             transition: all 0.5s;
+        }
+        
+        body.dark-theme .floating-img {
+            border-color: var(--night-light);
         }
         
         .about-text {
@@ -246,7 +316,7 @@
             gap: 0.5rem;
             transition: all 0.3s;
             font-weight: 500;
-            box-shadow:  ️0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -280,6 +350,11 @@
         .apps-section {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            transition: all 0.3s;
+        }
+        
+        body.dark-theme .apps-section {
+            background: linear-gradient(135deg, var(--night-primary), var(--night-secondary));
         }
         
         .apps-container {
@@ -314,6 +389,10 @@
             background: rgba(255,255,255,0.15);
         }
         
+        body.dark-theme .app-card:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
         .app-icon {
             font-size: 3rem;
             margin-bottom: 1.5rem;
@@ -345,6 +424,10 @@
             overflow: hidden;
         }
         
+        body.dark-theme .download-btn {
+            color: var(--night-primary);
+        }
+        
         .download-btn::after {
             content: '';
             position: absolute;
@@ -355,6 +438,10 @@
             background: rgba(108, 92, 231, 0.2);
             transform: rotate(30deg);
             transition: all 0.3s;
+        }
+        
+        body.dark-theme .download-btn::after {
+            background: rgba(156, 136, 255, 0.2);
         }
         
         .download-btn:hover::after {
@@ -399,6 +486,25 @@
             border-radius: 5px;
         }
         
+        /* Зелена підсвітка */
+        .glow-effect {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #00b894, #55efc4);
+            z-index: 999;
+            animation: glowPulse 3s ease infinite;
+            box-shadow: 0 0 20px #00b894;
+        }
+        
+        @keyframes glowPulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
         /* Анимации */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -418,32 +524,6 @@
         @keyframes textFloat {
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
-        }
-        
-        /* Темная тема */
-        .dark-theme {
-            --light: #2d3436;
-            --dark: #f5f6fa;
-            background-color: #1e272e;
-        }
-        
-        .dark-theme .section-title {
-            color: #a29bfe;
-        }
-
-        /* Кнопка темы */
-        #themeToggle {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-left: 1rem;
-            transition: all 0.3s;
-        }
-
-        #themeToggle:hover {
-            transform: rotate(30deg) scale(1.1);
         }
         
         /* Динамічні елементи */
@@ -470,6 +550,10 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             animation: pulse 3s ease-in-out infinite;
+        }
+        
+        body.dark-theme .line {
+            background: linear-gradient(90deg, transparent, var(--night-accent), transparent);
         }
         
         @keyframes rotate {
@@ -519,6 +603,9 @@
     
     <!-- Динамічні елементи -->
     <div id="dynamicElements"></div>
+    
+    <!-- Зелена підсвітка -->
+    <div class="glow-effect"></div>
 
     <header>
         <nav>
@@ -538,7 +625,7 @@
         <!-- Hero секція -->
         <section class="section" style="background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(108, 92, 231, 0.8)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 12rem 2rem;">
             <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Ласкаво прошу на мій сайт</h1>
-            <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto;">Розробка програмного забезпечення та креативні рішення</p>
+            <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto;">Розробка програмного забезпечення на C++ та інших мовах</p>
             <div style="margin-top: 3rem;">
                 <a href="#about" style="color: white; font-size: 2rem; animation: float 3s ease-in-out infinite;">
                     <i class="fas fa-chevron-down"></i>
@@ -556,8 +643,14 @@
                 </div>
                 <div class="about-text">
                     <h2>Хто я?</h2>
-                    <p>Привіт! Я FipokZec, розробник з України. Спеціалізуюсь на створенні сучасних додатків та веб-рішень. Моя страсть - це перетворювати ідеї в реальні технологічні продукти.</p>
-                    <p>У вільний час люблю вивчати нові технології, ділитися знаннями з іншими та вдосконалювати свої навички.</p>
+                    <p>Привіт! Я FipokZec, C++ розробник з України. Моя основна спеціалізація - розробка програмного забезпечення на C++ з використанням сучасних стандартів (C++17/20).</p>
+                    <p>Також маю досвід роботи з Kotlin (Android розробка) та HTML/CSS (верстка простих сайтів). Але моя справжня любов - це C++, особливо низькорівневі аспекти та оптимізація коду.</p>
+                    <p>У вільний час люблю:</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li>Працювати над власними проектами</li>
+                        <li>Вивчати нові технології в світі C++</li>
+                        <li>Оптимізувати код до мікросекунд</li>
+                    </ul>
                     
                     <div class="social-links">
                         <a href="https://instagram.com/ihnatenko_nikolay" target="_blank" class="social-btn instagram">
@@ -608,29 +701,34 @@
             <h2 class="section-title">Мої навички</h2>
             <div class="skills-container">
                 <div class="skill-item" data-percent="90">
-                    <span>C++</span>
+                    <span>C++ (C++17/20, STL, Boost)</span>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
-                <div class="skill-item" data-percent="85">
-                    <span>Java/Kotlin</span>
+                <div class="skill-item" data-percent="65">
+                    <span>Kotlin (Android розробка)</span>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
-                <div class="skill-item" data-percent="70">
-                    <span>SQL</span>
+                <div class="skill-item" data-percent="50">
+                    <span>HTML/CSS/JavaScript</span>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
-                <div class="skill-item" data-percent="45">
-                    <span>HTML/CSS</span>
+                <div class="skill-item" data-percent="40">
+                    <span>SQL (SQLite, PostgreSQL)</span>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
-                <div class="skill-item" data-percent="20">
-                    <span>GodotScript</span>
+                <div class="skill-item" data-percent="30">
+                    <span>GodotScript (GDScript)</span>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
+            </div>
+            
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Моя філософія коду</h3>
+                <p>"Код повинен бути не тільки функціональним, але й елегантним. Чим простіше рішення - тим воно геніальніше."</p>
             </div>
         </section>
     </main>
@@ -741,11 +839,22 @@
             if (document.body.classList.contains('dark-theme')) {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
+                
+                // Зберігаємо вибір теми
+                localStorage.setItem('theme', 'dark');
             } else {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
             }
         });
+
+        // Перевірка збереженої теми
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            document.getElementById('themeToggle').querySelector('i').classList.add('fa-sun');
+            document.getElementById('themeToggle').querySelector('i').classList.remove('fa-moon');
+        }
 
         // Запускаємо анімації
         window.addEventListener('load', function() {
