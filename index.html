@@ -1,12 +1,488 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мій сайт</title>
+    <title>FipokZec - Персональний сайт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Хедер */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Основной контент */
+        main {
+            margin-top: 80px;
+        }
+        
+        /* Секции */
+        .section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* Обо мне */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .about-photo {
+            position: relative;
+            flex: 0 0 300px;
+        }
+        
+        .photo-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--primary);
+            transform: rotate(-5deg);
+            z-index: -1;
+            border-radius: 15px;
+        }
+        
+        .floating-img {
+            animation: float 6s ease-in-out infinite;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 300px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            border: 5px solid white;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        .instagram { background: linear-gradient(45deg, #405DE6, #E1306C); }
+        .telegram { background: #0088CC; }
+        .github { background: #333; }
+        
+        /* Приложения */
+        .apps-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .apps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .app-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .app-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .app-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .app-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 1.5rem;
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+        
+        .download-btn:hover {
+            background: transparent;
+            color: white;
+        }
+        
+        /* Навыки */
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-item span {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background: rgba(108, 92, 231, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0;
+            transition: width 1.5s ease;
+            border-radius: 5px;
+        }
+        
+        /* Анимации */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Футер */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Привіт, світ!</h1>
-    <p>Це мій перший HTML-файл на Ubuntu.</p>
+    <header>
+        <nav>
+            <div class="logo">FipokZec</div>
+            <div class="nav-links">
+                <a href="#about">Про мене</a>
+                <a href="#apps">Додатки</a>
+                <a href="#skills">Навички</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Hero секція -->
+        <section class="section" style="background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(108, 92, 231, 0.8)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 10rem 2rem;">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Ласкаво прошу на мій сайт</h1>
+            <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto;">Розробка програмного забезпечення та креативні рішення</p>
+        </section>
+        
+        <!-- Про мене -->
+        <section id="about" class="section fade-in">
+            <h2 class="section-title">Про мене</h2>
+            <div class="about-container">
+                <div class="about-photo">
+                    <div class="photo-frame"></div>
+                    <img src="https://via.placeholder.com/300" alt="Моє фото" class="floating-img">
+                </div>
+                <div class="about-text">
+                    <h2>Хто я?</h2>
+                    <p>Привіт! Я FipokZec, розробник з України. Спеціалізуюсь на створенні сучасних додатків та веб-рішень. Моя страсть - це перетворювати ідеї в реальні технологічні продукти.</p>
+                    <p>У вільний час люблю вивчати нові технології, ділитися знаннями з іншими та вдосконалювати свої навички.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://instagram.com/ihnatenko_nikolay" target="_blank" class="social-btn instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                        <a href="https://t.me/kolya_fip" target="_blank" class="social-btn telegram">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                        <a href="https://github.com/Kolya-f" target="_blank" class="social-btn github">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Мої додатки -->
+        <section id="apps" class="section apps-section">
+            <h2 class="section-title">Мої додатки</h2>
+            <div class="apps-container">
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fas fa-desktop"></i></div>
+                        <h3>App Usage Monitor</h3>
+                        <p>Моніторинг використання додатків на вашому комп'ютері з детальною статистикою</p>
+                        <a href="/App_usage_monitor_setup.exe" class="download-btn">Завантажити для Windows <i class="fas fa-download"></i></a>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Mobile Debug App</h3>
+                        <p>Додаток для налагодження мобільних додатків (стабільна версія)</p>
+                        <a href="/app-debug(2).apk" class="download-btn">Завантажити для Android <i class="fas fa-download"></i></a>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fas fa-bug"></i></div>
+                        <h3>Error Debug App</h3>
+                        <p>Експериментальна версія з розширеними інструментами налагодження</p>
+                        <a href="/error/app-debug.apk" class="download-btn">Завантажити для Android <i class="fas fa-download"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Навички -->
+        <section id="skills" class="section">
+            <h2 class="section-title">Мої навички</h2>
+            <div class="skills-container">
+                <div class="skill-item" data-percent="90">
+                    <span>HTML/CSS</span>
+                    <div class="skill-bar"><div class="skill-progress"></div></div>
+                </div>
+                
+                <div class="skill-item" data-percent="85">
+                    <span>JavaScript</span>
+                    <div class="skill-bar"><div class="skill-progress"></div></div>
+                </div>
+                
+                <div class="skill-item" data-percent="80">
+                    <span>Python</span>
+                    <div class="skill-bar"><div class="skill-progress"></div></div>
+                </div>
+                
+                <div class="skill-item" data-percent="75">
+                    <span>Java/Kotlin</span>
+                    <div class="skill-bar"><div class="skill-progress"></div></div>
+                </div>
+                
+                <div class="skill-item" data-percent="70">
+                    <span>SQL</span>
+                    <div class="skill-bar"><div class="skill-progress"></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 FipokZec. Всі права захищені.</p>
+    </footer>
+
+    <script>
+        // Анімація навичок при скролі
+        function animateSkills() {
+            document.querySelectorAll('.skill-item').forEach(item => {
+                const percent = item.getAttribute('data-percent');
+                if (isElementInViewport(item)) {
+                    item.querySelector('.skill-progress').style.width = `${percent}%`;
+                }
+            });
+        }
+
+        // Перевірка видимості елемента
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.bottom >= 0
+            );
+        }
+
+        // Запускаємо анімації
+        window.addEventListener('scroll', animateSkills);
+        window.addEventListener('load', animateSkills);
+        
+        // Плавний скрол для навігації
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
