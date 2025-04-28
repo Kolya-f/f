@@ -22,9 +22,57 @@
         }
         
         body {
-            background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анімований фон */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #fd79a8, #6c5ce7);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Лоадер */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #6c5ce7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Хедер */
@@ -37,6 +85,8 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(108, 92, 231, 0.8);
         }
         
         nav {
@@ -51,6 +101,12 @@
             font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
         
         .nav-links {
@@ -149,6 +205,7 @@
             max-width: 300px;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
             border: 5px solid white;
+            transition: all 0.5s;
         }
         
         .about-text {
@@ -185,6 +242,24 @@
             transition: all 0.3s;
             font-weight: 500;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover::after {
+            left: 100%;
         }
         
         .social-btn:hover {
@@ -219,14 +294,16 @@
             backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 15px;
-            transition: all 0.3s;
+            transition: all 0.5s;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.2);
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .app-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: rotateY(15deg) scale(1.05);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.2);
             background: rgba(255,255,255,0.15);
         }
         
@@ -257,6 +334,24 @@
             font-weight: 600;
             transition: all 0.3s;
             border: 2px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(108, 92, 231, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .download-btn:hover::after {
+            left: 100%;
         }
         
         .download-btn:hover {
@@ -310,6 +405,11 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes textFloat {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
         
         /* Футер */
         footer {
@@ -318,6 +418,32 @@
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;
+        }
+
+        /* Темная тема */
+        .dark-theme {
+            --light: #2d3436;
+            --dark: #f5f6fa;
+            background-color: #1e272e;
+        }
+        
+        .dark-theme .section-title {
+            color: #a29bfe;
+        }
+
+        /* Кнопка темы */
+        #themeToggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 1rem;
+            transition: all 0.3s;
+        }
+
+        #themeToggle:hover {
+            transform: rotate(30deg) scale(1.1);
         }
         
         /* Адаптивность */
@@ -334,10 +460,22 @@
             .social-links {
                 justify-content: center;
             }
+
+            .section-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Лоадер -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Анімований фон -->
+    <div class="animated-bg"></div>
+
     <header>
         <nav>
             <div class="logo">FipokZec</div>
@@ -345,6 +483,9 @@
                 <a href="#about">Про мене</a>
                 <a href="#apps">Додатки</a>
                 <a href="#skills">Навички</a>
+                <button id="themeToggle" title="Змінити тему">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </nav>
     </header>
@@ -407,7 +548,7 @@
                         <div class="app-icon"><i class="fas fa-bug"></i></div>
                         <h3>Error Debug App</h3>
                         <p>Експериментальна версія з розширеними інструментами налагодження</p>
-                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/app-debug.apk" class="download-btn">Завантажити для Android <i class="fas fa-download"></i></a>
+                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/error/app-debug.apk" class="download-btn">Завантажити для Android <i class="fas fa-download"></i></a>
                     </div>
                 </div>
             </div>
@@ -445,9 +586,21 @@
         </section>
     </main>
     
-  
+    <footer>
+        <p>&copy; 2023 FipokZec. Всі права захищені.</p>
+    </footer>
 
     <script>
+        // Лоадер
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
         // Анімація навичок при скролі
         function animateSkills() {
             document.querySelectorAll('.skill-item').forEach(item => {
@@ -467,10 +620,6 @@
             );
         }
 
-        // Запускаємо анімації
-        window.addEventListener('scroll', animateSkills);
-        window.addEventListener('load', animateSkills);
-        
         // Плавний скрол для навігації
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -481,6 +630,53 @@
                 });
             });
         });
+
+        // Паралакс-ефект для фото
+        window.addEventListener('scroll', function() {
+            const scrolled = window.scrollY;
+            const floatingImg = document.querySelector('.floating-img');
+            if (floatingImg) {
+                floatingImg.style.transform = 
+                    `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.2}deg)`;
+            }
+        });
+
+        // Темна тема
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Анімація заголовків
+        document.addEventListener('DOMContentLoaded', function() {
+            const titles = document.querySelectorAll('h1, h2, h3');
+            
+            titles.forEach(title => {
+                let letters = title.textContent.split('');
+                title.textContent = '';
+                
+                letters.forEach((letter, i) => {
+                    let span = document.createElement('span');
+                    span.textContent = letter;
+                    span.style.animation = `textFloat 0.5s ease ${i/10}s forwards`;
+                    span.style.opacity = '0';
+                    span.style.display = 'inline-block';
+                    title.appendChild(span);
+                });
+            });
+        });
+
+        // Запускаємо анімації
+        window.addEventListener('scroll', animateSkills);
+        window.addEventListener('load', animateSkills);
     </script>
 </body>
 </html>
