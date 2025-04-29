@@ -1,5 +1,5 @@
 // animations.js (continued from previous part)
-
+/////////////////////////////////////////////////
 // Динамічні елементи фону
 function createDynamicElements() {
     const container = document.getElementById('dynamicElements');
