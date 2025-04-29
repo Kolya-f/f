@@ -50,7 +50,7 @@ function setupSmoothScroll() {
             }
         });
     });
-}
+}//////////////////////////
 
 // Функція для ініціалізації анімацій
 function initAnimations() {
