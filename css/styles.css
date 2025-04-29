@@ -11,51 +11,416 @@
     --night-accent: #e84393;
 }
 
-/* Стилі для секції принципів роботи */
+/* Оновлений блок принципів роботи */
 .principles-section {
     padding: 6rem 2rem;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(108, 92, 231, 0.8)), 
-                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.9), rgba(162, 155, 254, 0.9), rgba(253, 121, 168, 0.7));
+    background-size: 400% 400%;
     color: white;
     text-align: center;
     animation: gradientBG 15s ease infinite;
+    border-radius: 20px;
+    margin: 4rem auto;
+    max-width: 1200px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.principles-section:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.4);
+}
+
+.principles-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 75% 30%, rgba(255,255,255,0.15) 0%, transparent 50%);
+    z-index: -1;
 }
 
 .principles-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
     position: relative;
+    display: inline-block;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: textFloat 1.5s ease;
+}
+
+.principles-section h2::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    background: white;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.7;
+    animation: lineExpand 1s ease forwards;
+}
+
+.principles-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.principle-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.principle-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.principle-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+.principle-card:hover::before {
+    transform: translateX(100%);
+}
+
+.principle-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
     color: white;
+    position: relative;
+    display: inline-block;
 }
 
-.principles-section p {
-    max-width: 800px;
-    margin: 0 auto 1.5rem;
-    font-size: 1.2rem;
+.principle-card h3::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.principles-section strong {
-    color: var(--accent);
+.principle-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.9;
 }
 
-/* Стилі для темної теми */
+/* Іконки для принципів */
+.principle-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+/* Анімації */
+@keyframes textFloat {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes lineExpand {
+    0% { width: 0; }
+    100% { width: 60%; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Для темної теми */
 body.dark-theme .principles-section {
-    background: linear-gradient(rgba(30, 39, 46, 0.9), rgba(30, 39, 46, 0.9)), 
-                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, rgba(30, 39, 46, 0.9), rgba(44, 62, 80, 0.9), rgba(75, 54, 124, 0.7));
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-body.dark-theme .principles-section h2 {
-    color: white;
+body.dark-theme .principle-card {
+    background: rgba(30, 39, 46, 0.4);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-body.dark-theme .principles-section strong {
-    color: var(--night-accent);
+body.dark-theme .principle-card:hover {
+    background: rgba(30, 39, 46, 0.6);
+}
+
+
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .principles-section {
+        padding: 4rem 1.5rem;
+        margin: 2rem auto;
+    }
+    
+    .principles-section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .principles-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .principle-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .principles-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .principle-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .principle-icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 2rem;
+    }
+}
+
+.philosophy-quote-container {
+  position: relative;
+  max-width: 800px;
+  margin: 5rem auto;
+  padding: 3rem;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(162, 155, 254, 0.15));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+//////////////////
+.dynamic-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.code-particle {
+  position: absolute;
+  background: rgba(253, 121, 168, 0.6);
+  border-radius: 50%;
+  animation: float-particle 15s linear infinite;
+}
+
+.code-particle:nth-child(1) {
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.code-particle:nth-child(2) {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  left: 70%;
+  animation-delay: 3s;
+}
+
+.code-particle:nth-child(3) {
+  width: 80px;
+  height: 80px;
+  top: 80%;
+  left: 30%;
+  animation-delay: 6s;
+}
+
+.quote-content {
+  position: relative;
+  z-index: 2;
+}
+
+.typing-animation {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.typing-animation::after {
+  content: '|';
+  animation: blink 1s infinite;
+  position: absolute;
+  right: -15px;
+  bottom: 0;
+}
+
+.signature-animation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  animation: fadeIn 1s ease 2s forwards;
+}
+
+.signature-line {
+  width: 50px;
+  height: 2px;
+  background: var(--accent);
+  margin-right: 1rem;
+  transform: scaleX(0);
+  transform-origin: right;
+  animation: lineExpand 0.5s ease 2.5s forwards;
+}
+
+.signature {
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--accent);
+  transform: translateX(20px);
+  opacity: 0;
+  animation: slideIn 0.5s ease 2.5s forwards;
+}
+
+.interactive-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-bracket {
+  position: absolute;
+  font-size: 10rem;
+  color: rgba(255, 255, 255, 0.05);
+  font-weight: bold;
+  animation: float 15s ease-in-out infinite;
+}
+
+.floating-bracket:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.floating-bracket:nth-child(2) {
+  bottom: 10%;
+  right: 5%;
+  animation-delay: 5s;
+}
+
+.binary-flow {
+  position: absolute;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  animation: binaryFlow 20s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes float-particle {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-100px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes lineExpand {
+  to { transform: scaleX(1); }
+}
+
+@keyframes slideIn {
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(10deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes binaryFlow {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* Для темної теми */
+body.dark-theme .philosophy-quote-container {
+  background: linear-gradient(135deg, rgba(30, 39, 46, 0.3), rgba(44, 62, 80, 0.3));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .code-particle {
+  background: rgba(232, 67, 147, 0.4);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .philosophy-quote-container {
+    padding: 2rem;
+    margin: 3rem auto;
+  }
+  
+  .typing-animation {
+    font-size: 1.4rem;
+  }
+  
+  .floating-bracket {
+    font-size: 6rem;
+  }
 }
 
 /* Адаптивність */
