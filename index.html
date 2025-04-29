@@ -5,730 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FipokZec - Персональний сайт</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --dark: #2d3436;
-            --light: #f5f6fa;
-            --accent: #fd79a8;
-            --night-primary: #9c88ff;
-            --night-secondary: #8c7ae6;
-            --night-dark: #121212;
-            --night-light: #1e272e;
-            --night-accent: #e84393;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            color: var(--dark);
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-            transition: background-color 0.5s ease, color 0.3s ease;
-        }
-
-        /* Нічний режим */
-        body.dark-theme {
-            background-color: var(--night-dark);
-            color: #e0e0e0;
-        }
-        
-        body.dark-theme .section-title {
-            color: var(--night-primary);
-        }
-        
-        body.dark-theme .about-text h2,
-        body.dark-theme .skill-item span {
-            color: #f5f6fa;
-        }
-        
-        body.dark-theme .app-card {
-            background: rgba(30, 39, 46, 0.7);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        body.dark-theme .skill-bar {
-            background: rgba(156, 136, 255, 0.2);
-        }
-        
-        body.dark-theme .skill-progress {
-            background: linear-gradient(90deg, var(--night-primary), var(--night-accent));
-        }
-
-        /* Анімований фон */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #fd79a8, #6c5ce7);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            transition: opacity 0.5s;
-        }
-        
-        body.dark-theme .animated-bg {
-            opacity: 0.15;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Лоадер */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #6c5ce7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Хедер */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            background: rgba(108, 92, 231, 0.8);
-            transition: all 0.3s;
-        }
-        
-        body.dark-theme header {
-            background: rgba(30, 39, 46, 0.9);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-        
-        .logo:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        
-        body.dark-theme .nav-links a:hover {
-            color: var(--night-accent);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.3s;
-        }
-        
-        body.dark-theme .nav-links a::after {
-            background-color: var(--night-accent);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        /* Основной контент */
-        main {
-            margin-top: 80px;
-            padding-bottom: 50px;
-        }
-        
-        /* Секции */
-        .section {
-            padding: 6rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            color: var(--primary);
-            z-index: 1;
-        }
-        
-        body.dark-theme .section-title {
-            color: var(--night-primary);
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-        
-        body.dark-theme .section-title::after {
-            background: var(--night-accent);
-        }
-        
-        /* Обо мне */
-        .about-container {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .about-photo {
-            position: relative;
-            flex: 0 0 300px;
-        }
-        
-        .photo-frame {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 3px solid var(--primary);
-            transform: rotate(-5deg);
-            z-index: -1;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-        
-        body.dark-theme .photo-frame {
-            border-color: var(--night-primary);
-        }
-        
-        .floating-img {
-            animation: float 6s ease-in-out infinite;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 300px;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-            border: 5px solid white;
-            transition: all 0.5s;
-        }
-        
-        body.dark-theme .floating-img {
-            border-color: var(--night-light);
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .about-text h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-        
-        .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .social-btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            font-weight: 500;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .social-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255,255,255,0.2);
-            transform: rotate(30deg);
-            transition: all 0.3s;
-        }
-        
-        .social-btn:hover::after {
-            left: 100%;
-        }
-        
-        .social-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-        
-        .instagram { background: linear-gradient(45deg, #405DE6, #E1306C); }
-        .telegram { background: #0088CC; }
-        .github { background: #333; }
-        
-        /* Приложения */
-        .apps-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            transition: all 0.3s;
-        }
-        
-        body.dark-theme .apps-section {
-            background: linear-gradient(135deg, var(--night-primary), var(--night-secondary));
-        }
-        
-        .apps-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .app-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            transition: all 0.5s;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        
-        .app-card:hover {
-            transform: rotateY(15deg) scale(1.05);
-            box-shadow: 0 25px 40px rgba(0,0,0,0.2);
-            background: rgba(255,255,255,0.15);
-        }
-        
-        body.dark-theme .app-card:hover {
-            background: rgba(255,255,255,0.05);
-        }
-        
-        .app-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-        
-        .app-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .app-card p {
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-        
-        .download-btn {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.7rem 1.5rem;
-            background: white;
-            color: var(--primary);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        body.dark-theme .download-btn {
-            color: var(--night-primary);
-        }
-        
-        .download-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(108, 92, 231, 0.2);
-            transform: rotate(30deg);
-            transition: all 0.3s;
-        }
-        
-        body.dark-theme .download-btn::after {
-            background: rgba(156, 136, 255, 0.2);
-        }
-        
-        .download-btn:hover::after {
-            left: 100%;
-        }
-        
-        .download-btn:hover {
-            background: transparent;
-            color: white;
-        }
-        
-        /* Навыки */
-        .skills-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .skill-item {
-            margin-bottom: 1.5rem;
-        }
-        
-        .skill-item span {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .skill-bar {
-            height: 10px;
-            background: rgba(108, 92, 231, 0.2);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            width: 0;
-            transition: width 1.5s ease;
-            border-radius: 5px;
-        }
-        
-        /* Анимации */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 1s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes textFloat {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        /* Динамічні елементи */
-        .dynamic-element {
-            position: absolute;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .circle {
-            border-radius: 50%;
-            background: rgba(253, 121, 168, 0.2);
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .triangle {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            animation: rotate 15s linear infinite;
-        }
-        
-        .line {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: pulse 3s ease-in-out infinite;
-        }
-        
-        body.dark-theme .line {
-            background: linear-gradient(90deg, transparent, var(--night-accent), transparent);
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        /* Філософія та анімація */
-        .philosophy-section {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.dark-theme .philosophy-section {
-            background: linear-gradient(135deg, var(--night-primary), var(--night-secondary));
-        }
-
-        .philosophy-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .philosophy-quote {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            font-style: italic;
-            position: relative;
-            padding: 0 2rem;
-        }
-
-        .philosophy-quote::before,
-        .philosophy-quote::after {
-            content: '"';
-            font-size: 3rem;
-            color: rgba(255,255,255,0.3);
-            position: absolute;
-        }
-
-        .philosophy-quote::before {
-            top: -1rem;
-            left: -0.5rem;
-        }
-
-        .philosophy-quote::after {
-            bottom: -2.5rem;
-            right: -0.5rem;
-        }
-
-        .philosophy-author {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 3rem;
-        }
-
-        /* Анімація внизу */
-        .rotating-animation {
-            width: 100%;
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-            background: rgba(0,0,0,0.2);
-            margin-top: 4rem;
-        }
-
-        .rotating-circle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: rotate-scale 15s linear infinite;
-        }
-
-        @keyframes rotate-scale {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.5); }
-            100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
-        }
-
-        .additional-text {
-            padding: 3rem 2rem;
-            background-color: var(--light);
-            color: var(--dark);
-            text-align: center;
-        }
-
-        body.dark-theme .additional-text {
-            background-color: var(--night-light);
-            color: #e0e0e0;
-        }
-
-        .additional-text h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-
-        body.dark-theme .additional-text h2 {
-            color: var(--night-primary);
-        }
-
-        .additional-text p {
-            max-width: 800px;
-            margin: 0 auto 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-            }
-            
-            .about-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 4rem 1.5rem;
-            }
-
-            .philosophy-quote {
-                font-size: 1.4rem;
-                padding: 0 1rem;
-            }
-
-            .philosophy-quote::before,
-            .philosophy-quote::after {
-                font-size: 2rem;
-            }
-
-            .philosophy-quote::before {
-                top: -0.5rem;
-            }
-
-            .philosophy-quote::after {
-                bottom: -2rem;
-            }
-
-            .rotating-animation {
-                height: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .nav-links {
-                gap: 0.5rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .philosophy-quote {
-                font-size: 1.2rem;
-            }
-
-            .additional-text h2 {
-                font-size: 1.5rem;
-            }
-
-            .additional-text p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Лоадер -->
     <div id="loader">
         <div class="spinner"></div>
+        <div class="loader-text">Завантаження системи...</div>
     </div>
 
     <!-- Анімований фон -->
@@ -739,48 +25,97 @@
 
     <header>
         <nav>
-            <div class="logo">FipokZec</div>
+            <div class="logo">
+                <span class="logo-code">&lt;</span>
+                FipokZec
+                <span class="logo-code">/&gt;</span>
+            </div>
             <div class="nav-links">
-                <a href="#about">Про мене</a>
-                <a href="#apps">Додатки</a>
-                <a href="#skills">Навички</a>
+                <a href="#about"><i class="fas fa-user"></i> Про мене</a>
+                <a href="#apps"><i class="fas fa-mobile-alt"></i> Додатки</a>
+                <a href="#skills"><i class="fas fa-code"></i> Навички</a>
                 <button id="themeToggle" title="Змінити тему">
                     <i class="fas fa-moon"></i>
                 </button>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
             </div>
         </nav>
     </header>
     
     <main>
         <!-- Hero секція -->
-        <section class="section" style="background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(108, 92, 231, 0.8)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 12rem 2rem;">
-            <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Ласкаво прошу на мій сайт</h1>
-            <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto;">Розробка програмного забезпечення на C++ та інших мовах</p>
-            <div style="margin-top: 3rem;">
-                <a href="#about" style="color: white; font-size: 2rem; animation: float 3s ease-in-out infinite;">
-                    <i class="fas fa-chevron-down"></i>
-                </a>
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Привіт! Я <span class="highlight">FipokZec</span></h1>
+                    <div class="typewriter">
+                        <span class="typewriter-text">C++ розробник</span>
+                        <span class="typewriter-cursor">|</span>
+                    </div>
+                    <p class="hero-subtitle">Спеціаліст з високопродуктивних рішень та оптимізації коду</p>
+                </div>
+                <div class="hero-scroll">
+                    <a href="#about" class="scroll-down">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
             </div>
+            <div class="hero-particles" id="heroParticles"></div>
         </section>
         
         <!-- Про мене -->
         <section id="about" class="section fade-in">
-            <h2 class="section-title">Про мене</h2>
+            <h2 class="section-title">
+                <span class="section-title-code">//</span> Про мене
+            </h2>
             <div class="about-container">
                 <div class="about-photo">
                     <div class="photo-frame"></div>
                     <img src="https://github.com/Kolya-f/f/raw/main/images/my_photo.png" alt="Моє фото" class="floating-img">
+                    <div class="photo-tech-icons">
+                        <i class="fab fa-cuttlefish"></i>
+                        <i class="fab fa-android"></i>
+                        <i class="fab fa-html5"></i>
+                    </div>
                 </div>
                 <div class="about-text">
                     <h2>Хто я?</h2>
                     <p>Привіт! Я FipokZec, C++ розробник з України. Моя основна спеціалізація - розробка програмного забезпечення на C++ з використанням сучасних стандартів (C++17/20).</p>
                     <p>Також маю досвід роботи з Kotlin (Android розробка) та HTML/CSS (верстка простих сайтів). Але моя справжня любов - це C++, особливо низькорівневі аспекти та оптимізація коду.</p>
-                    <p>У вільний час люблю:</p>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li>Працювати над власними проектами</li>
-                        <li>Вивчати нові технології в світі C++</li>
-                        <li>Оптимізувати код до мікросекунд</li>
-                    </ul>
+                    <div class="about-features">
+                        <div class="feature-card">
+                            <i class="fas fa-bolt"></i>
+                            <span>Оптимізація</span>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-cogs"></i>
+                            <span>Складні системи</span>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-rocket"></i>
+                            <span>Висока продуктивність</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hobbies-section">
+                        <h3>У вільний час:</h3>
+                        <div class="hobbies-list">
+                            <div class="hobby-item">
+                                <i class="fas fa-laptop-code"></i>
+                                <span>Працюю над власними проектами</span>
+                            </div>
+                            <div class="hobby-item">
+                                <i class="fas fa-book"></i>
+                                <span>Вивчаю нові технології</span>
+                            </div>
+                            <div class="hobby-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Оптимізую код</span>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="social-links">
                         <a href="https://instagram.com/ihnatenko_nikolay" target="_blank" class="social-btn instagram">
@@ -799,28 +134,54 @@
 
         <!-- Мої додатки -->
         <section id="apps" class="section apps-section">
-            <h2 class="section-title">Мої додатки</h2>
+            <h2 class="section-title">
+                <span class="section-title-code">#</span> Мої додатки
+            </h2>
             <div class="apps-container">
                 <div class="apps-grid">
                     <div class="app-card">
                         <div class="app-icon"><i class="fas fa-desktop"></i></div>
                         <h3>App Usage Monitor</h3>
                         <p>Моніторинг використання додатків на вашому комп'ютері з детальною статистикою</p>
-                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/App_usage_monitor_setup.exe" class="download-btn">Завантажити для Windows <i class="fas fa-download"></i></a>
+                        <div class="app-features">
+                            <span><i class="fas fa-check"></i> Реальний моніторинг</span>
+                            <span><i class="fas fa-check"></i> Детальна статистика</span>
+                            <span><i class="fas fa-check"></i> Гнучкі налаштування</span>
+                        </div>
+                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/App_usage_monitor_setup.exe" class="download-btn">
+                            <span class="btn-text">Завантажити для Windows</span>
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     
                     <div class="app-card">
                         <div class="app-icon"><i class="fas fa-mobile-alt"></i></div>
                         <h3>Mobile Debug App</h3>
                         <p>Додаток для налагодження мобільних додатків (стабільна версія)</p>
-                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/app-debug(2).apk" class="download-btn">Завантажити для Android <i class="fas fa-download"></i></a>
+                        <div class="app-features">
+                            <span><i class="fas fa-check"></i> Віддалене налагодження</span>
+                            <span><i class="fas fa-check"></i> Логування помилок</span>
+                            <span><i class="fas fa-check"></i> Аналіз продуктивності</span>
+                        </div>
+                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/app-debug(2).apk" class="download-btn">
+                            <span class="btn-text">Завантажити для Android</span>
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     
                     <div class="app-card">
                         <div class="app-icon"><i class="fas fa-bug"></i></div>
                         <h3>Error Debug App</h3>
                         <p>Експериментальна версія з розширеними інструментами налагодження</p>
-                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/error/app-debug.apk" class="download-btn">Завантажити для Android <i class="fas fa-download"></i></a>
+                        <div class="app-features">
+                            <span><i class="fas fa-check"></i> Розширена діагностика</span>
+                            <span><i class="fas fa-check"></i> Тестування продуктивності</span>
+                            <span><i class="fas fa-check"></i> Експериментальні функції</span>
+                        </div>
+                        <a href="https://github.com/Kolya-f/f/raw/main/downloads/app-debug.apk" class="download-btn">
+                            <span class="btn-text">Завантажити для Android</span>
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -828,235 +189,141 @@
 
         <!-- Навички -->
         <section id="skills" class="section">
-            <h2 class="section-title">Мої навички</h2>
+            <h2 class="section-title">
+                <span class="section-title-code">&lt;/&gt;</span> Мої навички
+            </h2>
             <div class="skills-container">
                 <div class="skill-item" data-percent="90">
-                    <span>C++ (C++17/20, STL, Boost)</span>
+                    <div class="skill-info">
+                        <span>C++ (C++17/20, STL, Boost)</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
                 <div class="skill-item" data-percent="65">
-                    <span>Kotlin (Android розробка)</span>
+                    <div class="skill-info">
+                        <span>Kotlin (Android розробка)</span>
+                        <span class="skill-percent">65%</span>
+                    </div>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
                 <div class="skill-item" data-percent="50">
-                    <span>HTML/CSS/JavaScript</span>
+                    <div class="skill-info">
+                        <span>HTML/CSS/JavaScript</span>
+                        <span class="skill-percent">50%</span>
+                    </div>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
                 <div class="skill-item" data-percent="40">
-                    <span>SQL (SQLite, PostgreSQL)</span>
+                    <div class="skill-info">
+                        <span>SQL (SQLite, PostgreSQL)</span>
+                        <span class="skill-percent">40%</span>
+                    </div>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
                 
                 <div class="skill-item" data-percent="30">
-                    <span>GodotScript (GDScript)</span>
+                    <div class="skill-info">
+                        <span>GodotScript (GDScript)</span>
+                        <span class="skill-percent">30%</span>
+                    </div>
                     <div class="skill-bar"><div class="skill-progress"></div></div>
                 </div>
             </div>
             
-            <div style="margin-top: 3rem; text-align: center;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Моя філософія коду</h3>
-                <p>"Код повинен бути не тільки функціональним, але й елегантним. Чим простіше рішення - тим воно геніальніше."</p>
+            <div class="philosophy-card">
+                <div class="philosophy-icon">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="philosophy-text">"Код повинен бути не тільки функціональним, але й елегантним. Чим простіше рішення - тим воно геніальніше."</p>
+                <div class="philosophy-tech-icons">
+                    <i class="fab fa-cuttlefish"></i>
+                    <i class="fas fa-plus"></i>
+                    <i class="fab fa-cuttlefish"></i>
+                    <i class="fas fa-plus"></i>
+                    <i class="fab fa-js"></i>
+                </div>
             </div>
         </section>
 
         <!-- Філософія -->
-        <section class="philosophy-section">
-            <div class="philosophy-content">
-                <div class="philosophy-quote">Програмування - це не просто написання коду, це мистецтво створення логічних структур, які оживають у цифровому світі.</div>
-                <div class="philosophy-author">- FipokZec</div>
+        <section class="philosophy-quote-container">
+            <div class="dynamic-background">
+                <div class="code-particle"></div>
+                <div class="code-particle"></div>
+                <div class="code-particle"></div>
+            </div>
+            
+            <div class="quote-content">
+                <div class="typing-animation">
+                    <span class="quote-text">Програмування - це не просто написання коду, це мистецтво створення логічних структур, які оживають у цифровому світі.</span>
+                </div>
                 
-                <!-- Анімація внизу -->
-                <div class="rotating-animation" id="rotatingAnimation"></div>
+                <div class="signature-animation">
+                    <span class="signature-line"></span>
+                    <span class="signature">- FipokZec</span>
+                </div>
+            </div>
+            
+            <div class="interactive-elements">
+                <div class="floating-bracket">{</div>
+                <div class="floating-bracket">}</div>
+                <div class="binary-flow">10101010</div>
             </div>
         </section>
 
-        <!-- Додатковий текст -->
-        <section class="additional-text">
+        <!-- Принципи роботи -->
+        <section class="principles-section">
             <h2>Мої принципи роботи</h2>
-            <p>Я вірю, що якісний код починається з чіткого розуміння проблеми. Моя робота базується на трьох основних принципах:</p>
-            <p><strong>1. Простота:</strong> Найкращі рішення часто найпростіші. Я завжди прагну знайти найефективніший шлях реалізації.</p>
-            <p><strong>2. Оптимізація:</strong> Кожен рядок коду має бути обдуманим. Я зосереджуюсь на продуктивності та ефективності.</p>
-            <p><strong>3. Читабельність:</strong> Код повинен бути зрозумілим не тільки комп'ютеру, але й іншим розробникам.</p>
+            <div class="principles-list">
+                <div class="principle-card">
+                    <div class="principle-icon">💡</div>
+                    <h3>Простота</h3>
+                    <p>Найкращі рішення часто найпростіші. Я завжди прагну знайти найефективніший шлях реалізації.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">⚡</div>
+                    <h3>Оптимізація</h3>
+                    <p>Кожен рядок коду має бути обдуманим. Я зосереджуюсь на продуктивності та ефективності.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">📖</div>
+                    <h3>Читабельність</h3>
+                    <p>Код повинен бути зрозумілим не тільки комп'ютеру, але й іншим розробникам.</p>
+                </div>
+            </div>
         </section>
     </main>
 
-    <script>
-        // Лоадер
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loader').style.display = 'none';
-                }, 500);
-            }, 1000);
-        });
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-code">&lt;</span>
+                FipokZec
+                <span class="logo-code">/&gt;</span>
+            </div>
+            <div class="footer-links">
+                <a href="#about">Про мене</a>
+                <a href="#apps">Додатки</a>
+                <a href="#skills">Навички</a>
+                <a href="https://github.com/Kolya-f" target="_blank">GitHub</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://instagram.com/ihnatenko_nikolay" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://t.me/kolya_fip" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="https://github.com/Kolya-f" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            © 2023 FipokZec. Всі права захищені.
+        </div>
+    </footer>
 
-        // Створення динамічних елементів
-        function createDynamicElements() {
-            const container = document.getElementById('dynamicElements');
-            const colors = ['#6c5ce7', '#a29bfe', '#fd79a8', '#00cec9'];
-            
-            for (let i = 0; i < 15; i++) {
-                const element = document.createElement('div');
-                element.classList.add('dynamic-element');
-                
-                const type = Math.random() > 0.5 ? 'circle' : 
-                             Math.random() > 0.5 ? 'triangle' : 'line';
-                element.classList.add(type);
-                
-                // Рандомні параметри
-                const size = Math.random() * 100 + 20;
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                const opacity = Math.random() * 0.4 + 0.1;
-                const delay = Math.random() * 5;
-                const duration = Math.random() * 10 + 10;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                
-                element.style.width = `${size}px`;
-                element.style.height = type === 'circle' ? `${size}px` : 
-                                      type === 'triangle' ? '0' : '2px';
-                element.style.left = `${left}vw`;
-                element.style.top = `${top}vh`;
-                element.style.opacity = opacity;
-                element.style.animationDelay = `${delay}s`;
-                element.style.animationDuration = `${duration}s`;
-                
-                if (type === 'triangle') {
-                    const direction = Math.random() > 0.5 ? 'left' : 'right';
-                    const borderWidth = size / 2;
-                    element.style.borderWidth = `0 ${direction === 'left' ? borderWidth : 0}px ${size}px ${direction === 'right' ? borderWidth : 0}px`;
-                    element.style.borderColor = `transparent transparent ${color} transparent`;
-                } else if (type === 'line') {
-                    element.style.width = `${size * 3}px`;
-                    element.style.background = `linear-gradient(90deg, transparent, ${color}, transparent)`;
-                } else {
-                    element.style.background = color;
-                }
-                
-                container.appendChild(element);
-            }
-        }
-
-        // Анімація обертання внизу
-        function createRotatingAnimation() {
-            const container = document.getElementById('rotatingAnimation');
-            const colors = ['#6c5ce7', '#a29bfe', '#fd79a8', '#00cec9', '#55efc4'];
-            
-            for (let i = 0; i < 5; i++) {
-                const circle = document.createElement('div');
-                circle.classList.add('rotating-circle');
-                
-                const size = Math.random() * 200 + 100;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const duration = Math.random() * 10 + 10;
-                const delay = Math.random() * 5;
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                
-                circle.style.width = `${size}px`;
-                circle.style.height = `${size}px`;
-                circle.style.background = color;
-                circle.style.left = `${left}%`;
-                circle.style.top = `${top}%`;
-                circle.style.animationDuration = `${duration}s`;
-                circle.style.animationDelay = `-${delay}s`;
-                
-                container.appendChild(circle);
-            }
-        }
-
-        // Анімація навичок при скролі
-        function animateSkills() {
-            document.querySelectorAll('.skill-item').forEach(item => {
-                const percent = item.getAttribute('data-percent');
-                if (isElementInViewport(item)) {
-                    item.querySelector('.skill-progress').style.width = `${percent}%`;
-                }
-            });
-        }
-
-        // Перевірка видимості елемента
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.bottom >= 0
-            );
-        }
-
-        // Плавний скрол для навігації
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Паралакс-ефект для фото
-        window.addEventListener('scroll', function() {
-            const scrolled = window.scrollY;
-            const floatingImg = document.querySelector('.floating-img');
-            if (floatingImg) {
-                floatingImg.style.transform = 
-                    `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.2}deg)`;
-            }
-        });
-
-        // Темна тема
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const icon = themeToggle.querySelector('i');
-            if (document.body.classList.contains('dark-theme')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // Перевірка збереженої теми
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-theme');
-            document.getElementById('themeToggle').querySelector('i').classList.add('fa-sun');
-            document.getElementById('themeToggle').querySelector('i').classList.remove('fa-moon');
-        }
-
-        // Запускаємо анімації
-        window.addEventListener('load', function() {
-            createDynamicElements();
-            createRotatingAnimation();
-            animateSkills();
-            
-            // Анімація заголовків
-            const titles = document.querySelectorAll('h1, h2, h3');
-            
-            titles.forEach(title => {
-                let letters = title.textContent.split('');
-                title.textContent = '';
-                
-                letters.forEach((letter, i) => {
-                    let span = document.createElement('span');
-                    span.textContent = letter;
-                    span.style.animation = `textFloat 0.5s ease ${i/10}s forwards`;
-                    span.style.opacity = '0';
-                    span.style.display = 'inline-block';
-                    title.appendChild(span);
-                });
-            });
-        });
-
-        window.addEventListener('scroll', animateSkills);
-    </script>
+    <script src="js/script.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/particles.js"></script>
 </body>
 </html>
