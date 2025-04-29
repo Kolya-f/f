@@ -1,0 +1,779 @@
+:root {
+    --primary: #6c5ce7;
+    --secondary: #a29bfe;
+    --dark: #2d3436;
+    --light: #f5f6fa;
+    --accent: #fd79a8;
+    --night-primary: #9c88ff;
+    --night-secondary: #8c7ae6;
+    --night-dark: #121212;
+    --night-light: #1e272e;
+    --night-accent: #e84393;
+}
+
+/* Стилі для секції принципів роботи */
+.principles-section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(108, 92, 231, 0.8)), 
+                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    animation: gradientBG 15s ease infinite;
+}
+
+.principles-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    color: white;
+}
+
+.principles-section p {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.2rem;
+}
+
+.principles-section strong {
+    color: var(--accent);
+}
+
+/* Стилі для темної теми */
+body.dark-theme .principles-section {
+    background: linear-gradient(rgba(30, 39, 46, 0.9), rgba(30, 39, 46, 0.9)), 
+                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+body.dark-theme .principles-section h2 {
+    color: white;
+}
+
+body.dark-theme .principles-section strong {
+    color: var(--night-accent);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .principles-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .principles-section h2 {
+        font-size: 2rem;
+    }
+    
+    .principles-section p {
+        font-size: 1rem;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    color: var(--dark);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* Нічний режим */
+body.dark-theme {
+    background-color: var(--night-dark);
+    color: #e0e0e0;
+}
+
+body.dark-theme .section-title {
+    color: var(--night-primary);
+}
+
+body.dark-theme .about-text h2,
+body.dark-theme .skill-item span {
+    color: #f5f6fa;
+}
+
+body.dark-theme .app-card {
+    background: rgba(30, 39, 46, 0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+body.dark-theme .skill-bar {
+    background: rgba(156, 136, 255, 0.2);
+}
+
+body.dark-theme .skill-progress {
+    background: linear-gradient(90deg, var(--night-primary), var(--night-accent));
+}
+
+/* Анімований фон */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #fd79a8, #6c5ce7);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    transition: opacity 0.5s;
+}
+
+body.dark-theme .animated-bg {
+    opacity: 0.15;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Лоадер */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #6c5ce7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Хедер */
+header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    background: rgba(108, 92, 231, 0.8);
+    transition: all 0.3s;
+}
+
+body.dark-theme header {
+    background: rgba(30, 39, 46, 0.9);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+body.dark-theme .nav-links a:hover {
+    color: var(--night-accent);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s;
+}
+
+body.dark-theme .nav-links a::after {
+    background-color: var(--night-accent);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Основной контент */
+main {
+    margin-top: 80px;
+    padding-bottom: 50px;
+}
+
+/* Секции */
+.section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    color: var(--primary);
+    z-index: 1;
+}
+
+body.dark-theme .section-title {
+    color: var(--night-primary);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+body.dark-theme .section-title::after {
+    background: var(--night-accent);
+}
+
+/* Обо мне */
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.about-photo {
+    position: relative;
+    flex: 0 0 300px;
+}
+
+.photo-frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--primary);
+    transform: rotate(-5deg);
+    z-index: -1;
+    border-radius: 15px;
+    transition: all 0.3s;
+}
+
+body.dark-theme .photo-frame {
+    border-color: var(--night-primary);
+}
+
+.floating-img {
+    animation: float 6s ease-in-out infinite;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 300px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+    border: 5px solid white;
+    transition: all 0.5s;
+}
+
+body.dark-theme .floating-img {
+    border-color: var(--night-light);
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: rotate(30deg);
+    transition: all 0.3s;
+}
+
+.social-btn:hover::after {
+    left: 100%;
+}
+
+.social-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.instagram { background: linear-gradient(45deg, #405DE6, #E1306C); }
+.telegram { background: #0088CC; }
+.github { background: #333; }
+
+/* Приложения */
+.apps-section {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    transition: all 0.3s;
+}
+
+body.dark-theme .apps-section {
+    background: linear-gradient(135deg, var(--night-primary), var(--night-secondary));
+}
+
+.apps-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.app-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    transition: all 0.5s;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.app-card:hover {
+    transform: rotateY(15deg) scale(1.05);
+    box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.15);
+}
+
+body.dark-theme .app-card:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.app-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.app-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.app-card p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background: white;
+    color: var(--primary);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid white;
+    position: relative;
+    overflow: hidden;
+}
+
+body.dark-theme .download-btn {
+    color: var(--night-primary);
+}
+
+.download-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(108, 92, 231, 0.2);
+    transform: rotate(30deg);
+    transition: all 0.3s;
+}
+
+body.dark-theme .download-btn::after {
+    background: rgba(156, 136, 255, 0.2);
+}
+
+.download-btn:hover::after {
+    left: 100%;
+}
+
+.download-btn:hover {
+    background: transparent;
+    color: white;
+}
+
+/* Навыки */
+.skills-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.skill-item {
+    margin-bottom: 1.5rem;
+}
+
+.skill-item span {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.skill-bar {
+    height: 10px;
+    background: rgba(108, 92, 231, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    width: 0;
+    transition: width 1.5s ease;
+    border-radius: 5px;
+}
+
+/* Анимации */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes textFloat {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Динамічні елементи */
+.dynamic-element {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.circle {
+    border-radius: 50%;
+    background: rgba(253, 121, 168, 0.2);
+    animation: float 8s ease-in-out infinite;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    animation: rotate 15s linear infinite;
+}
+
+.line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+body.dark-theme .line {
+    background: linear-gradient(90deg, transparent, var(--night-accent), transparent);
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+/* Філософія та анімація */
+.philosophy-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+body.dark-theme .philosophy-section {
+    background: linear-gradient(135deg, var(--night-primary), var(--night-secondary));
+}
+
+.philosophy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.philosophy-quote {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    position: relative;
+    padding: 0 2rem;
+}
+
+.philosophy-quote::before,
+.philosophy-quote::after {
+    content: '"';
+    font-size: 3rem;
+    color: rgba(255,255,255,0.3);
+    position: absolute;
+}
+
+.philosophy-quote::before {
+    top: -1rem;
+    left: -0.5rem;
+}
+
+.philosophy-quote::after {
+    bottom: -2.5rem;
+    right: -0.5rem;
+}
+
+.philosophy-author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+/* Анімація внизу */
+.rotating-animation {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0,0,0,0.2);
+    margin-top: 4rem;
+}
+
+.rotating-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: rotate-scale 15s linear infinite;
+}
+
+@keyframes rotate-scale {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.5); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+}
+
+.additional-text {
+    padding: 3rem 2rem;
+    background-color: var(--light);
+    color: var(--dark);
+    text-align: center;
+}
+
+body.dark-theme .additional-text {
+    background-color: var(--night-light);
+    color: #e0e0e0;
+}
+
+.additional-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+body.dark-theme .additional-text h2 {
+    color: var(--night-primary);
+}
+
+.additional-text p {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section {
+        padding: 4rem 1.5rem;
+    }
+
+    .philosophy-quote {
+        font-size: 1.4rem;
+        padding: 0 1rem;
+    }
+
+    .philosophy-quote::before,
+    .philosophy-quote::after {
+        font-size: 2rem;
+    }
+
+    .philosophy-quote::before {
+        top: -0.5rem;
+    }
+
+    .philosophy-quote::after {
+        bottom: -2rem;
+    }
+
+    .rotating-animation {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .philosophy-quote {
+        font-size: 1.2rem;
+    }
+
+    .additional-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .additional-text p {
+        font-size: 1rem;
+    }
+}
